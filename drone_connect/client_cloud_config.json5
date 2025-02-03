@@ -1,0 +1,5 @@
+{
+    "mode": "client",
+    "connect": {"endpoints": ["tcp/172.235.173.27:7447"]},
+    "scouting": {"multicast": {"enabled": false}},
+}

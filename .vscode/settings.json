@@ -1,0 +1,42 @@
+{
+    "python.languageServer": "Default",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    "python.analysis.indexing": true,
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    "python.analysis.packageIndexDepths": [
+        { "name": "", "depth": 20, "includeAllSymbols": true }
+    ],
+    "editor.tokenColorCustomizations":
+    {
+        "textMateRules":
+        [
+            {
+                "scope": "meta.function-call",
+                "settings":
+                    {
+                        "foreground": "#DCDCAA"
+                    }
+            },
+            {
+                "scope": "string.quoted.single.python",
+                "settings":
+                    {
+                        "foreground": "#CE9178"
+                    }
+            },
+            {
+                "scope": "source.python",
+                "settings":
+                    {
+                        "foreground": "#9CDCFE",
+                    }
+            }
+        ]
+    }
+}
