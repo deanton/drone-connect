@@ -14,6 +14,8 @@ my_name = os.path.basename(__file__)
 connection_string = 'udp:127.0.0.1:14550'
 drone = mavutil.mavlink_connection(connection_string)
 
+session = None
+
 print("waiting for heartbeat")
 result = drone.wait_heartbeat()
 print(f"passed wait heartbeat\n{result}\n")
