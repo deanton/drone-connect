@@ -174,7 +174,7 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
 
     # Define MAVLINK message types to listen for
-    message_types = ["GPS_RAW_INT", "BATTERY_STATUS"]
+    message_types = ["SYS_STATUS", "BATTERY_STATUS", "ATTITUDE", "GLOBAL_POSITION_INT", "VFR_HUD", "ALTITUDE"]
 
     # Start telemetry listeners
     threads = start_telemetry_listeners(message_types)
