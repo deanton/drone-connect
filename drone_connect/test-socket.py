@@ -52,7 +52,7 @@ def disconnect_from_namespace():
 @sio.on("telemetry_update", namespace="/drone/002")
 def on_telemetry_update(data):
     pass
-    # print("Received telemetry update in /drone/002:")#), data)
+    print("Received telemetry update in /drone/002:", data)
     # print(data["telemetry"]["gps_raw_int"])
     # print(data["telemetry"]["timestamp"])
 
