@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  zenohd:
+    image: eclipse/zenoh:latest
+    container_name: zenohd
+    networks:
+      - zenoh_network
+    ports:
+      - "7447:7447"
+      - "8000:8000"
+    environment:
+      - RUST_LOG=debug
+
+networks:
+  zenoh_network:
+    name: zenoh_network # Ensures the network is created with a fixed name
+    driver: bridge # Creates a bridge network automatically

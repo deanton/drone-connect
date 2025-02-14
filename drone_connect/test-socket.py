@@ -18,7 +18,7 @@ def disconnect():
 @sio.on("telemetry_update")
 def on_telemetry_update(data):
     pass
-    #print("Received telemetry update in /:", data)
+    print("Received telemetry update in /:", data)
 
 @sio.event
 def connect_error(data):
@@ -85,18 +85,19 @@ def on_statustext_update(data):
 # Main function to connect to the server
 def main():
     try:
-        namespace = "/drone/002"
-        sio.connect(f"http://localhost:8001", namespaces=["/", namespace, "/mydrones", "/mydronesstatus"], socketio_path="socket.io") #, namespaces=["/", namespace])
+        #namespace = "/drone/002"
+        #sio.connect(f"http://localhost:8001", namespaces=["/", namespace, "/mydrones", "/mydronesstatus"], socketio_path="socket.io") #, namespaces=["/", namespace])
+        sio.connect(f"http://localhost:8001", namespaces=["/", "/mydrones", "/mydronesstatus"], socketio_path="socket.io")
         #sio.connect(f"http://localhost:8001")
         print("Socket.IO client connected!")
         print("Available namespaces from server:", sio.namespaces)
 
 
-        # Force activation of the namespace
-        if namespace in sio.namespaces:
-            sio.emit("force_activation", data={}, namespace=namespace)
-        else:
-            print(f"Namespace {namespace} is missing from the client!")
+        # # Force activation of the namespace
+        # if namespace in sio.namespaces:
+        #     sio.emit("force_activation", data={}, namespace=namespace)
+        # else:
+        #     print(f"Namespace {namespace} is missing from the client!")
         # Wait for events
         sio.wait()
     except Exception as e:

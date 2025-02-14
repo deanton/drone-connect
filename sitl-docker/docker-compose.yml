@@ -1,0 +1,58 @@
+version: "3.8"
+services:
+  sitl_copter1:
+    build: .
+    container_name: sitl_copter1
+    environment:
+      - VEHICLE_TYPE=copter
+      - INSTANCE_ID=copter_1234
+      - ZENOH_PREFIX=myhome/drone/copter_1
+      - TCP_PORT=5760
+    networks:
+      - zenoh_network
+      #- sitl_network
+    restart: unless-stopped
+    # depends_on:
+    #   - zenohd
+    ports:
+      - "5760:5760" # Expose TCP MAVLink Port
+
+  sitl_copter2:
+    build: .
+    container_name: sitl_copter2
+    environment:
+      - VEHICLE_TYPE=copter
+      - INSTANCE_ID=copter_5678
+      - ZENOH_PREFIX=myhome/drone/copter_2
+      - TCP_PORT=5760
+    networks:
+      - zenoh_network
+    restart: unless-stopped
+    # depends_on:
+    #   - zenohd
+    ports:
+      - "5761:5760" # Expose TCP MAVLink Port
+
+  sitl_plane1:
+    build: .
+    container_name: sitl_plane1
+    environment:
+      - VEHICLE_TYPE=plane
+      - INSTANCE_ID=plane_9999
+      - ZENOH_PREFIX=myhome/drone/plane1
+      - TCP_PORT=5760
+    networks:
+      - zenoh_network
+    restart: unless-stopped
+    # depends_on:
+    #   - zenohd
+    ports:
+      - "5762:5760" # Expose TCP MAVLink Port
+
+networks:
+  zenoh_network:
+    external: true
+  
+# networks:
+#   sitl_network:
+  

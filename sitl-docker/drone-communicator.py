@@ -38,7 +38,10 @@ signal.signal(signal.SIGTERM, signal_handler)
 my_name = os.path.basename(__file__)
 
 # Connect to the drone via MAVLink
-MAVLINK_PORT = 'udp:127.0.0.1:14550'
+MAVLINK_PORT = 'udp:127.0.0.1:14551'
+#MAVLINK_PORT = 'udp:0.0.0.0:14551'  # Listen on any IP
+
+
 drone = None
 
 def connect_mavlink():
@@ -47,6 +50,7 @@ def connect_mavlink():
         try:
             print(f"Connecting to MAVLink on {MAVLINK_PORT}...")
             drone = mavutil.mavlink_connection(MAVLINK_PORT)
+            #drone = mavutil.mavlink_connection(MAVLINK_PORT, source_system=1, source_component=1)
             
             print("Waiting for heartbeat...")
             result = drone.wait_heartbeat()
@@ -79,6 +83,7 @@ def telemetry_listener(message_type):
                     "message": message,
                 })
                 session.put(resource_key, payload)
+                print(f"Sending telemetry at {resource_key}: {payload}")
         except Exception as e:
             print(f"Error receiving {message_type}: {e}")
             time.sleep(1) # Prevent fast looping on errors
@@ -103,6 +108,7 @@ def heartbeat_listener():
                 })
 
                 session.put(resource_key, payload)
+                print(f"Sending heardbeat at {resource_key}: {payload}")
         except Exception as e:
             print(f"Error receiving HEARTBEAT: {e}")
             time.sleep(1)
@@ -128,6 +134,7 @@ def statustext_listener():
                 })
             
                 session.put(resource_key, payload)
+                print(f"Sending status at {resource_key}: {payload}")
         except Exception as e:
             print(f"Error receiving STATUSTEXT: {e}")
             time.sleep(1)
